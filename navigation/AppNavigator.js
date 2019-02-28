@@ -7,6 +7,7 @@ import {
 import {
     Details,
     Relations,
+    AddRelations,
 } from './../screens';
 
 const MainStack = createStackNavigator({
@@ -15,6 +16,9 @@ const MainStack = createStackNavigator({
     },
     Details: {
         screen: Details,
+    },
+    AddRelations: {
+        screen: AddRelations,
     }
 });
   

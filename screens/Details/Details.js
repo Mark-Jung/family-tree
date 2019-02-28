@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 
 import { connect } from 'react-redux';
 
@@ -9,14 +10,28 @@ const {
     flatListStyle
 } = styles;
 
+
 class DetailsComponent extends Component {
 
     render() {
+        const toAddRelations = NavigationActions.navigate({
+            routeName: 'AddRelations',
+          
+            params: {},
+          
+            action: NavigationActions.navigate({ routeName: 'AddRelations' }),
+        });
+        
+        
         return (
             <View style={flatListStyle}>
                 <Text>
                     I'm details
                 </Text>
+                <Button
+                    title="go to AddRelations"
+                    onPress={() => this.props.navigation.dispatch(toAddRelations)}
+                ></Button>
             </View>
         );
     }

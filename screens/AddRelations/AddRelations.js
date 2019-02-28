@@ -10,34 +10,33 @@ const {
     flatListStyle
 } = styles;
 
-
-class DetailsComponent extends Component {
+class AddRelationsComponent extends Component {
 
     render() {
-        const toAddRelations = NavigationActions.navigate({
-            routeName: 'AddRelations',
+        const toDetails = NavigationActions.navigate({
+            routeName: 'Details',
           
             params: {},
           
-            action: NavigationActions.navigate({ routeName: 'AddRelations' }),
+            action: NavigationActions.navigate({ routeName: 'Details' }),
         });
-        
         
         return (
             <View style={flatListStyle}>
                 <Text>
-                    I'm details
+                    I'm AddRelations
                 </Text>
+
                 <Button
-                    title="go to AddRelations"
-                    onPress={() => this.props.navigation.dispatch(toAddRelations)}
+                    title="go to details"
+                    onPress={() => this.props.navigation.dispatch(toDetails)}
                 ></Button>
             </View>
         );
     }
 }
 
-export { DetailsComponent };
+export { AddRelationsComponent };
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -50,4 +49,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export const Details = connect(mapStateToProps, mapDispatchToProps)(DetailsComponent);
+export const AddRelations = connect(mapStateToProps, mapDispatchToProps)(AddRelationsComponent);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import CustomHeader from '../../components/Common/CustomHeader'
 
 import { connect } from 'react-redux';
 
@@ -11,7 +12,9 @@ const {
 } = styles;
 
 class RelationsComponent extends Component {
-
+    static navigationOptions = {
+        title: 'Relations',
+      };
     render() {
         const toDetails = NavigationActions.navigate({
             routeName: 'Details',

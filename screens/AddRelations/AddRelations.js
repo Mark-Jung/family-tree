@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
+import { Container, Header, Content, Form, Item, Input, Label, Picker, Icon, ListItem, CheckBox, Body } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 
 import { connect } from 'react-redux';
@@ -11,6 +12,10 @@ const {
 } = styles;
 
 class AddRelationsComponent extends Component {
+
+    onValueChange2 = () => {
+
+    }
 
     render() {
         const toDetails = NavigationActions.navigate({
@@ -26,8 +31,68 @@ class AddRelationsComponent extends Component {
                 <Text>
                     I'm AddRelations
                 </Text>
+            <Container>
+            <Header />
+                <Content>
+                <Form>
+                    <Item floatingLabel>
+                        <Label>First Name</Label>
+                        <Input />
+                    </Item>
+                    <Item floatingLabel>
+                        <Label>Last Name</Label>
+                        <Input />
+                    </Item>
+                    <Item floatingLabel last>
+                        <Label>Birth Year</Label>
+                        <Input />
+                    </Item>
 
-                <Button
+                    {/* 
+                    <Item picker>
+                        <Picker
+                            mode="dropdown"
+                            iosIcon={<Icon name="arrow-down" />}
+                            style={{ width: undefined }}
+                            placeholder="Preferred Gender"
+                            placeholderStyle={{ color: "#bfc6ea" }}
+                            placeholderIconColor="#007aff"
+                            selectedValue={this.state.selected2}
+                            onValueChange={this.onValueChange2.bind(this)}
+                        >
+                            <Picker.Item label="Male" value="key0" />
+                            <Picker.Item label="Female" value="key1" />
+                            <Picker.Item label="Other" value="key2" />
+                        </Picker>
+                    </Item> */}
+
+                    <ListItem>
+                        <CheckBox checked={false} />
+                        <Body>
+                        <   Text>deceased</Text>
+                        </Body>
+                    </ListItem>
+
+                    <Text>
+                        This person is the 
+                    </Text>
+
+                    <ListItem>
+                        <CheckBox checked={false} />
+                        <Body>
+                            <Text>step</Text>
+                        </Body>
+                        <CheckBox checked={false} />
+                        <Body>
+                            <Text>adopted/adoptive</Text>
+                        </Body>
+                    </ListItem>
+                    
+                </Form>
+                </Content>
+            </Container>
+
+            <Button
                     title="go to details"
                     onPress={() => this.props.navigation.dispatch(toDetails)}
                 ></Button>
@@ -36,7 +101,10 @@ class AddRelationsComponent extends Component {
     }
 }
 
+
+
 export { AddRelationsComponent };
+
 
 const mapStateToProps = (state, ownProps) => {
     return {

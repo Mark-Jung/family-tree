@@ -2,6 +2,7 @@ import React from 'react';
 import { 
     createStackNavigator,
     createAppContainer,
+    defaultNavigationOptions,
 } from 'react-navigation';
 
 import {
@@ -10,7 +11,8 @@ import {
     AddRelations,
 } from './../screens';
 
-const MainStack = createStackNavigator({
+const MainStack = createStackNavigator
+({
     Relations: {
         screen: Relations,
     },
@@ -19,10 +21,20 @@ const MainStack = createStackNavigator({
     },
     AddRelations: {
         screen: AddRelations,
-    }
+    },
+}, {
+    initialRouteName: 'Relations',
+    defaultNavigationOptions: {
+        headerStyle: {
+        backgroundColor: '#86ADDB',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+        fontWeight: 'bold',
+        },
+    },
 });
   
 
 const Main = createAppContainer(MainStack);
-
 export default Main;

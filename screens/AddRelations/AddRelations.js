@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Button, AppRegistry } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Picker, Icon, ListItem, CheckBox, Body } from 'native-base';
 import { NavigationActions } from 'react-navigation';
+import CustomHeader from '../../components/Common/CustomHeader'
 
 import { connect } from 'react-redux';
 
@@ -17,6 +18,9 @@ class AddRelationsComponent extends Component {
 
     }
 
+    static navigationOptions = {
+        title: 'Add Relation',
+      };
     render() {
         const toDetails = NavigationActions.navigate({
             routeName: 'Details',

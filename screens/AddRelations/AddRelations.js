@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, AppRegistry } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Picker, Icon, ListItem, CheckBox, Body } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 
@@ -27,76 +27,66 @@ class AddRelationsComponent extends Component {
         });
         
         return (
-            <View style={flatListStyle}>
-                <Text>
-                    I'm AddRelations
-                </Text>
             <Container>
-            <Header />
+            <View style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+              }}>
                 <Content>
                 <Form>
-                    <Item floatingLabel>
+                    <Item floatingLabel style={{
+                        width: 150,
+                    }}>
                         <Label>First Name</Label>
                         <Input />
                     </Item>
-                    <Item floatingLabel>
+                </Form>
+                </Content>
+                <Content>
+                <Form>
+                    <Item floatingLabel floatingLabel style={{
+                        width: 150,
+                    }}>
                         <Label>Last Name</Label>
                         <Input />
                     </Item>
-                    <Item floatingLabel last>
+                </Form>
+                </Content>
+            </View>
+
+            <View style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+              }}>
+                <Content>
+                <Form>
+                    <Item floatingLabel >
                         <Label>Birth Year</Label>
                         <Input />
                     </Item>
-
-                    {/* 
-                    <Item picker>
-                        <Picker
-                            mode="dropdown"
-                            iosIcon={<Icon name="arrow-down" />}
-                            style={{ width: undefined }}
-                            placeholder="Preferred Gender"
-                            placeholderStyle={{ color: "#bfc6ea" }}
-                            placeholderIconColor="#007aff"
-                            selectedValue={this.state.selected2}
-                            onValueChange={this.onValueChange2.bind(this)}
-                        >
-                            <Picker.Item label="Male" value="key0" />
-                            <Picker.Item label="Female" value="key1" />
-                            <Picker.Item label="Other" value="key2" />
-                        </Picker>
-                    </Item> */}
-
-                    <ListItem>
-                        <CheckBox checked={false} />
-                        <Body>
-                        <   Text>deceased</Text>
-                        </Body>
-                    </ListItem>
-
-                    <Text>
-                        This person is the 
-                    </Text>
-
-                    <ListItem>
-                        <CheckBox checked={false} />
-                        <Body>
-                            <Text>step</Text>
-                        </Body>
-                        <CheckBox checked={false} />
-                        <Body>
-                            <Text>adopted/adoptive</Text>
-                        </Body>
-                    </ListItem>
-                    
                 </Form>
                 </Content>
-            </Container>
-
-            <Button
-                    title="go to details"
-                    onPress={() => this.props.navigation.dispatch(toDetails)}
-                ></Button>
+                <Content>
+                    <ListItem>
+                        <CheckBox checked={false} />
+                        <Body>
+                        <Text>deceased</Text>
+                        </Body>
+                    </ListItem>
+                </Content>
+                <Content>
+                <Form>
+                    <Item floatingLabel >
+                        <Label>Death Year</Label>
+                        <Input />
+                    </Item>
+                </Form>
+                </Content>
             </View>
+            
+            </Container>
         );
     }
 }

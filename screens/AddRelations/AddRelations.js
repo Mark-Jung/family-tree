@@ -14,13 +14,53 @@ const {
 
 class AddRelationsComponent extends Component {
 
-    onValueChange2 = () => {
-
-    }
-
     static navigationOptions = {
         title: 'Add Relation',
       };
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            selected: undefined,
+            deceased: false,
+            step: false, 
+            adopted: false,
+            first: undefined,
+            last: undefined, 
+            birth: undefined,
+            death: undefined,
+        };
+    }
+    onValueChange(value: string) {
+        this.setState({
+            selected: value
+        });
+    }
+
+    deceasedToggle = () => {
+        if (this.state.deceased){
+            this.setState({deceased: false});
+        } else {
+            this.setState({deceased: true});
+        }
+    }
+
+    stepToggle = () => {
+        if (this.state.step){
+            this.setState({step: false});
+        } else {
+            this.setState({step: true});
+        }
+    }
+
+    adoptedToggle = () => {
+        if (this.state.adopted){
+            this.setState({adopted: false});
+        } else {
+            this.setState({adopted: true});
+        }
+    }
+
     render() {
         const toDetails = NavigationActions.navigate({
             routeName: 'Details',
@@ -43,19 +83,22 @@ class AddRelationsComponent extends Component {
                         width: 150,
                         paddingBottom: 5
                     }}>
-                        <Label>First Name</Label>
-                        <Input />
+                        <Label style={{color: '#9ab2ce'}}>First Name</Label>
+                        <Input onChangeText={(text) => this.setState({first: text})}
+                                value={this.state.first}/>
                     </Item>
                 </Form>
                 </Content>
+                
                 <Content>
                 <Form>
                     <Item floatingLabel floatingLabel style={{
                         width: 150,
                         paddingBottom: 5
                     }}>
-                        <Label>Last Name</Label>
-                        <Input />
+                        <Label style={{color: '#9ab2ce'}}>Last Name</Label>
+                        <Input onChangeText={(text) => this.setState({last: text})}
+                                value={this.state.last}/>
                     </Item>
                 </Form>
                 </Content>
@@ -72,8 +115,9 @@ class AddRelationsComponent extends Component {
                         paddingBottom: 5,
                         marginTop: 5
                     }}>
-                        <Label>Birth Year</Label>
-                        <Input />
+                        <Label style={{color: '#9ab2ce'}}>Birth Year</Label>
+                        <Input onChangeText={(text) => this.setState({first: text})}
+                                value={this.state.birth}/>
                     </Item>
                 </Form>
                 </Content>
@@ -81,12 +125,17 @@ class AddRelationsComponent extends Component {
                     <ListItem style={{marginTop: 21, 
                             borderBottomColor: 'white'
                         }}>
-                        <CheckBox checked={false} color="gray" />
+                        <CheckBox 
+                            checked={this.state.deceased}
+                            color="gray"
+                            onPress={this.deceasedToggle}
+                            />
                         <Body>
                         <Text> deceased</Text>
                         </Body>
                     </ListItem>
                 </Content>
+                
                 <Content style={{marginRight: 12}}>
                 <Form>
                     <Item floatingLabel style={{
@@ -94,8 +143,10 @@ class AddRelationsComponent extends Component {
                         marginTop: 5,
                         marginLeft: 0,
                     }}>
-                        <Label>Death Year</Label>
-                        <Input />
+                        <Label style={{color: '#9ab2ce'}}>Death Year</Label>
+                        <Input onChangeText={(text) => this.setState({death: text})}
+                                value={this.state.death}
+                                disabled={!this.state.deceased}/>
                     </Item>
                 </Form>
                 </Content>
@@ -105,15 +156,18 @@ class AddRelationsComponent extends Component {
                         <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
-                            style={{ width: Dimensions.get('window').width - 10}}
+                            placeholderStyle={{ color: "#9ab2ce" }}
+                            style={{ width: Dimensions.get('window').width - 10,
+                                    marginTop: 10}}
                             placeholder="Preferred Gender"
-                            placeholderStyle={{ color: "#bfc6ea" }}
                             placeholderIconColor="#007aff"
-                            
+                            selectedValue={this.state.selected}
+                            onValueChange={this.onValueChange.bind(this)}
                         >
-                            <Picker.Item label="Male" value="key0" />
-                            <Picker.Item label="Female" value="key1" />
-                            <Picker.Item label="Other" value="key2" />
+                            
+                            <Picker.Item label="Male" value="key1" />
+                            <Picker.Item label="Female" value="key2" />
+                            <Picker.Item label="Other" value="key3" />
                         </Picker>
                     </Item> 
 
@@ -134,7 +188,10 @@ class AddRelationsComponent extends Component {
                             width: 70,
                             marginLeft: 9,
                     }}>
-                        <CheckBox checked={false} color="gray" />
+                        <CheckBox 
+                            checked={this.state.step}
+                            color="gray"
+                            onPress={this.stepToggle}/>
                         <Body>
                         <Text> step</Text>
                         </Body>
@@ -146,7 +203,10 @@ class AddRelationsComponent extends Component {
                             marginLeft: 0,
                             marginTop: 24,
                         }}>
-                        <CheckBox checked={false} color="gray" />
+                        <CheckBox
+                            checked={this.state.adopted}
+                            color="gray"
+                            onPress={this.adoptedToggle}/>
                         <Body>
                         <Text style={{marginLeft: 3}}>adopted or adoptive</Text>
                         </Body>

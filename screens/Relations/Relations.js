@@ -24,7 +24,7 @@ class RelationsComponent extends Component {
             action: NavigationActions.navigate({ routeName: 'Details' }),
         });
         return (
-            <View style={flatListStyle}>
+            <View style={flatListStyle} >
                 <Text>
                     {this.props.error_message}
                 </Text>

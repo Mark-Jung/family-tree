@@ -35,6 +35,7 @@ class AddRelationsComponent extends Component {
             is_step: false, 
             is_adopted: false,
             relation: undefined,
+            relatedTo: undefined,
             notes: undefined,
 
             show_optional: false,
@@ -44,9 +45,15 @@ class AddRelationsComponent extends Component {
             nickname: undefined,
         };
     }
-    onValueChange(value: string) {
+    onGenderChange(value: string) {
         this.setState({
             gender: value
+        });
+    }
+
+    onRelatedToChange(value: string) {
+        this.setState({
+            relatedTo: value
         });
     }
 
@@ -201,7 +208,7 @@ class AddRelationsComponent extends Component {
                             placeholder="Preferred Gender"
                             placeholderIconColor="#007aff"
                             selectedValue={this.state.gender}
-                            onValueChange={this.onValueChange.bind(this)}
+                            onValueChange={this.onGenderChange.bind(this)}
                         >
                             
                             <Picker.Item label="Male" value="male" />
@@ -351,8 +358,8 @@ class AddRelationsComponent extends Component {
                                     marginRight: 10}}
                             placeholder="an existing family member"
                             placeholderIconColor="#007aff"
-                            selectedValue={this.state.gender}
-                            onValueChange={this.onValueChange.bind(this)}
+                            selectedValue={this.state.relatedTo}
+                            onValueChange={this.onRelatedToChange.bind(this)}
                         >
                             <Picker.Item label="me" value="userID" />
                             <Picker.Item label="Mom's Name" value="mom" />

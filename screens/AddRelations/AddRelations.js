@@ -416,7 +416,7 @@ class AddRelationsComponent extends Component {
                 <View style={{flexDirection: 'row', justifyContent: 'space-between',}}>
                     <View style={{width: 150}}>
                         <Button
-                            style={{backgroundColor: '#DB9872', borderColor: '#DB9872', borderRadius: 22,}}
+                            style={{backgroundColor: '#DB9872', borderColor: '#DB9872', borderRadius: 22, marginLeft: 8.5}}
                             textStyle={{color: 'white'}}
                             onPress={() => this.props.navigation.dispatch(toAddRelations)}>
                             Add Another
@@ -424,7 +424,7 @@ class AddRelationsComponent extends Component {
                     </View>
                     <View style={{width: 150}}>
                         <Button
-                            style={{backgroundColor: '#94878F', borderColor: '#94878F', borderRadius: 22,}}
+                            style={{backgroundColor: '#94878F', borderColor: '#94878F', borderRadius: 22, marginRight: 8.5}}
                             textStyle={{color: 'white'}}
                             onPress={() => this.props.navigation.dispatch(toRelations)}>
                             Done

@@ -1,21 +1,44 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
-import { Container, Header, Content, Left, List, ListItem, Right } from 'native-base';
+import { Container, Header, Content, Icon, Item, Left, List, ListItem, Picker, Right } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import CustomHeader from '../../components/Common/CustomHeader'
 
 import { connect } from 'react-redux';
 
+import {
+    thunk_load_relation,
+} from '../../ducks/relations';
+
 import styles from './styles';
+import { thunk_load_dashboard } from '../../ducks/relations';
 
 const {
     flatListStyle
 } = styles;
 
+
 class RelationsComponent extends Component {
     static navigationOptions = {
         title: 'Relations',
-      };
+    };
+
+    componentDidMount() {
+       this.props.load_relations();
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            arrange_by: undefined,
+        };
+    }
+    onArrangeChange(value: string) {
+        this.setState({
+            arrange_by: value
+        });
+    }
+
     render() {
         const toDetails = NavigationActions.navigate({
             routeName: 'Details',
@@ -24,11 +47,30 @@ class RelationsComponent extends Component {
           
             action: NavigationActions.navigate({ routeName: 'Details' }),
         });
+
+        console.log(this.props.all_relations);
         return (
  
             <Container>
             
             <Content>
+            <Item picker>
+                        <Picker
+                            mode="dropdown"
+                            iosIcon={<Icon name="arrow-down" />}
+                            placeholderStyle={{ color: "#9ab2ce" }}
+
+                            placeholder="Arrange by"
+                            placeholderIconColor="#007aff"
+                            selectedValue={this.state.arrange_by}
+                            onValueChange={this.onArrangeChange.bind(this)}
+                        >
+                            
+                            <Picker.Item label="Age" value="age" />
+                            <Picker.Item label="Name" value="name" />
+                        </Picker>
+            </Item> 
+
             <List>
                 <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
                     <Left><Text style={{fontSize: 20}}>Amy Yang</Text></Left> 
@@ -49,16 +91,20 @@ class RelationsComponent extends Component {
 export { RelationsComponent };
 
 const mapStateToProps = (state, ownProps) => {
-    const { relations } = state;
-    const { error_message } = relations;
+    const { all_relations } = state;
+    const { error_message } = all_relations;
     return {
         ...ownProps,
         error_message,
+        all_relations,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        load_relations: () => {
+            dispatch(thunk_load_relation())
+        }
     }
 }
 

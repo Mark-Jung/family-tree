@@ -9,19 +9,20 @@ import { connect } from 'react-redux';
 
 import styles from './styles';
 
+import {
+    thunk_load_relation,
+} from '../../ducks/relations';
+
 const {
     flatListStyle
 } = styles;
 
 class AddRelationsComponent extends Component {
 
-    onValueChange2 = () => {
-
-    }
-
     static navigationOptions = {
         title: 'Add Relation',
       };
+
     
     constructor(props) {
         super(props);
@@ -35,7 +36,7 @@ class AddRelationsComponent extends Component {
             is_step: false, 
             is_adopted: false,
             relation: undefined,
-            relatedTo: undefined,
+            related_to: undefined,
             notes: undefined,
 
             show_optional: false,
@@ -358,7 +359,7 @@ class AddRelationsComponent extends Component {
                                     marginRight: 10}}
                             placeholder="an existing family member"
                             placeholderIconColor="#007aff"
-                            selectedValue={this.state.relatedTo}
+                            selectedValue={this.state.related_to}
                             onValueChange={this.onRelatedToChange.bind(this)}
                         >
                             <Picker.Item label="me" value="userID" />

@@ -14,6 +14,7 @@ export const LOAD_RELATIONS_FAILURE = "familytree/relations/LOAD_RELATIONS_FAILU
 
 const INITIAL_STATE = {
     error_message: "hi",
+    all_relations: "",
 };
 
 
@@ -31,7 +32,7 @@ export default function reducer(state = INITIAL_STATE, action) {
             return {
                 ...state, 
                 error_message: "", 
-                relations: action.payload, 
+                all_relations: action.payload, 
             }
         default: 
             return state;

@@ -91,8 +91,8 @@ class RelationsComponent extends Component {
 export { RelationsComponent };
 
 const mapStateToProps = (state, ownProps) => {
-    const { all_relations } = state;
-    const { error_message } = all_relations;
+    const { relations } = state;
+    const { error_message, all_relations } = relations;
     return {
         ...ownProps,
         error_message,

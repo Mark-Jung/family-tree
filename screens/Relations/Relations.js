@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
+import { Container, Header, Content, Left, List, ListItem, Right } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import CustomHeader from '../../components/Common/CustomHeader'
 
@@ -24,18 +25,23 @@ class RelationsComponent extends Component {
             action: NavigationActions.navigate({ routeName: 'Details' }),
         });
         return (
-            <View style={flatListStyle} >
-                <Text>
-                    {this.props.error_message}
-                </Text>
-
-                <Button
-                    title="go to details"
-                    onPress={() => this.props.navigation.dispatch(toDetails)}
-                >
-
-                </Button>
-            </View>
+ 
+            <Container>
+            
+            <Content>
+            <List>
+                <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
+                    <Left><Text style={{fontSize: 20}}>Amy Yang</Text></Left> 
+                    <Right><Text style={{fontWeight: "bold", color: '#DB9872'}}>Me</Text></Right>
+                </ListItem>
+                <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
+                    <Left><Text style={{fontSize: 20}}>Lexi Ryan</Text></Left> 
+                    <Right><Text style={{fontWeight: "bold", color: '#DB9872'}}>Mother</Text></Right>
+                </ListItem>
+                
+            </List>
+            </Content>
+            </Container>
         );
     }
 }

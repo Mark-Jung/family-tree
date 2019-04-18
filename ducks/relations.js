@@ -14,7 +14,16 @@ export const LOAD_RELATIONS_FAILURE = "familytree/relations/LOAD_RELATIONS_FAILU
 
 const INITIAL_STATE = {
     error_message: "hi",
-    all_relations: "",
+    all_relations: [{"id": 1, 
+                    "first": "Amy", 
+                    "last": "Yang", 
+                    "relation": "self"},
+                {
+                    "id": 2, 
+                    "first": "Lexi", 
+                    "last": "Ryan", 
+                    "relation": "Mother"
+                }],
 };
 
 

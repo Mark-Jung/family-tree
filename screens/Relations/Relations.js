@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button, Container, Header, Icon, Content, Item, Left, List, ListItem, Picker, Right } from 'native-base';
 import { NavigationActions } from 'react-navigation';
+import _ from 'lodash';
 
 import { connect } from 'react-redux';
 
@@ -33,20 +34,36 @@ class RelationsComponent extends Component {
             is_ascending: true,
         };
     }
+
     onArrangeChange(value: string) {
         this.setState({
             arrange_by: value
         });
     }
 
+
+
+    populateRelations = () => {
+        return _.map(this.props.all_relations, (item, index)=>{
+            const toDetails = NavigationActions.navigate({
+                routeName: 'Details',
+              
+                params: {},
+              
+                action: NavigationActions.navigate({ routeName: 'Details' }),
+            });
+            
+            return (
+                <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
+                    <Left><Text style={{fontSize: 20}}>{item.first + " " + item.last}</Text></Left> 
+                    <Right><Text style={{fontWeight: "bold", color: '#DB9872'}}>{item.relation}</Text></Right>
+                </ListItem>
+            )
+        })
+    }
+
     render() {
-        const toDetails = NavigationActions.navigate({
-            routeName: 'Details',
-          
-            params: {},
-          
-            action: NavigationActions.navigate({ routeName: 'Details' }),
-        });
+        
 
         console.log(this.props.all_relations);
         return (
@@ -89,14 +106,7 @@ class RelationsComponent extends Component {
          
 
             <List>
-                <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
-                    <Left><Text style={{fontSize: 20}}>Amy Yang</Text></Left> 
-                    <Right><Text style={{fontWeight: "bold", color: '#DB9872'}}>Me</Text></Right>
-                </ListItem>
-                <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
-                    <Left><Text style={{fontSize: 20}}>Lexi Ryan</Text></Left> 
-                    <Right><Text style={{fontWeight: "bold", color: '#DB9872'}}>Mother</Text></Right>
-                </ListItem>
+                {this.populateRelations()}
                 
             </List>
             </Content>

@@ -64,8 +64,6 @@ class RelationsComponent extends Component {
 
     render() {
         
-
-        console.log(this.props.all_relations);
         return (
  
             <Container>

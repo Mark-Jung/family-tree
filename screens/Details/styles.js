@@ -15,5 +15,10 @@ export default {
         justifyContent: 'center',
         marginHorizontal: 8,
         marginTop: 5
+    },
+    infoHeadStyle: {
+        textAlign: 'left',
+        fontSize: 24,
+        color: '#101010',
     }
 }

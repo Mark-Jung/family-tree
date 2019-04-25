@@ -120,12 +120,12 @@ class AddRelationsComponent extends Component {
 
     render() {
         
-        const toRelations = NavigationActions.navigate({
-            routeName: 'Relations',
+        const toDetails = NavigationActions.navigate({
+            routeName: 'Details',
           
             params: {},
           
-            action: NavigationActions.navigate({ routeName: 'Relations' }),
+            action: NavigationActions.navigate({ routeName: 'Details' }),
         });
         
         const toAddRelations = NavigationActions.navigate({
@@ -439,7 +439,7 @@ class AddRelationsComponent extends Component {
                         <Button
                             style={{backgroundColor: '#94878F', borderColor: '#94878F', borderRadius: 22, marginRight: 8.5}}
                             textStyle={{color: 'white'}}
-                            onPress={() => this.props.navigation.dispatch(toRelations)}>
+                            onPress={() => this.props.navigation.dispatch(toDetails)}>
                             Done
                         </Button>
                     </View>

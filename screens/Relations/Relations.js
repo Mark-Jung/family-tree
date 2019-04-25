@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
-import { Container, Header, Content, Icon, Item, Left, List, ListItem, Picker, Right } from 'native-base';
+import { View, Text } from 'react-native';
+import { Button, Container, Header, Icon, Content, Item, Left, List, ListItem, Picker, Right } from 'native-base';
 import { NavigationActions } from 'react-navigation';
-import CustomHeader from '../../components/Common/CustomHeader'
+import _ from 'lodash';
 
 import { connect } from 'react-redux';
 
@@ -31,30 +31,51 @@ class RelationsComponent extends Component {
         super(props);
         this.state = {
             arrange_by: undefined,
+            is_ascending: true,
         };
     }
+
     onArrangeChange(value: string) {
         this.setState({
             arrange_by: value
         });
     }
 
-    render() {
-        const toDetails = NavigationActions.navigate({
-            routeName: 'Details',
-          
-            params: {},
-          
-            action: NavigationActions.navigate({ routeName: 'Details' }),
-        });
 
-        console.log(this.props.all_relations);
+
+    populateRelations = () => {
+        return _.map(this.props.all_relations, (item, index)=>{
+            const toDetails = NavigationActions.navigate({
+                routeName: 'Details',
+              
+                params: {},
+              
+                action: NavigationActions.navigate({ routeName: 'Details' }),
+            });
+            
+            return (
+                <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
+                    <Left><Text style={{fontSize: 20}}>{item.first + " " + item.last}</Text></Left> 
+                    <Right><Text style={{fontWeight: "bold", color: '#DB9872'}}>{item.relation}</Text></Right>
+                </ListItem>
+            )
+        })
+    }
+
+    render() {
+        
         return (
  
             <Container>
-            
             <Content>
-            <Item picker>
+
+            <View style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+            }}>
+                <Item picker>
                         <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
@@ -69,17 +90,21 @@ class RelationsComponent extends Component {
                             <Picker.Item label="Age" value="age" />
                             <Picker.Item label="Name" value="name" />
                         </Picker>
-            </Item> 
+                </Item>
+                
+                <Button iconUp transparent onPress={() => this.setState({is_ascending: !this.state.is_ascending})}>
+                    <Text style={{fontSize: 16, color: 'black'}}>
+                        {this.state.is_ascending ? "Ascending" : "Descending"}
+                    </Text>
+                    <Icon name={this.state.is_ascending ? "arrow-up" : "arrow-down"} style={{fontSize: 20, color: 'grey'}}/>
+                </Button>
+            </View>
+            
+            
+         
 
             <List>
-                <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
-                    <Left><Text style={{fontSize: 20}}>Amy Yang</Text></Left> 
-                    <Right><Text style={{fontWeight: "bold", color: '#DB9872'}}>Me</Text></Right>
-                </ListItem>
-                <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
-                    <Left><Text style={{fontSize: 20}}>Lexi Ryan</Text></Left> 
-                    <Right><Text style={{fontWeight: "bold", color: '#DB9872'}}>Mother</Text></Right>
-                </ListItem>
+                {this.populateRelations()}
                 
             </List>
             </Content>

@@ -6,6 +6,7 @@ import {
 } from 'react-navigation';
 
 import {
+    LogIn,
     Details,
     Relations,
     AddRelations,
@@ -13,6 +14,9 @@ import {
 
 const MainStack = createStackNavigator
 ({
+    LogIn: {
+        screen: LogIn,
+    },
     Relations: {
         screen: Relations,
     },
@@ -23,7 +27,7 @@ const MainStack = createStackNavigator
         screen: AddRelations,
     },
 }, {
-    initialRouteName: 'Relations',
+    initialRouteName: 'LogIn',
     defaultNavigationOptions: {
         headerStyle: {
         backgroundColor: '#86ADDB',

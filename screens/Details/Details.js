@@ -19,14 +19,48 @@ const {
 
 
 class DetailsComponent extends Component {
-    static navigationOptions = {
-        title: 'Details',
-    };
+    //static navigationOptions = {
+        //title: 'Details',
+    //};
+
+    static navigationOptions = ({navigation, screenProps}) => {
+        const params = navigation.state.params || {};
+      
+        return {
+          title:       params.title,
+          headerRight: params.headerRight,
+        }
+      }
+      
+      _setNavigationParams() {
+        let title       = 'Details';
+        let headerRight = <Button
+            style={{ backgroundColor: '#86ADDB', borderColor: '#86ADDB', paddingRight: 15, }}
+            textStyle={{ color: 'white' }}
+            onPress={() => this.props.navigation.dispatch(this._toAddRelations)}>
+            Edit
+        </Button>;
+      
+        this.props.navigation.setParams({ 
+          title,
+          headerRight, 
+        });
+      }
+      
+      componentWillMount() {
+        this._setNavigationParams();
+      }
+      
+      _toAddRelations = NavigationActions.navigate({
+        routeName: 'AddRelations',
+        params: {},
+        action: NavigationActions.navigate({ routeName: 'AddRelations' }),
+    });
 
     constructor(props) {
         super(props);
         this.state = {
-            name: "Lexi Ryan", // undefined,
+            name: "Amy Yang", // undefined,
             relation: "Me", // undefined,
             birth_year: "1998", // undefined,
             nickname: "Princess", // undefined,
@@ -34,12 +68,11 @@ class DetailsComponent extends Component {
 
         };
     }
+
     render() {
         const toAddRelations = NavigationActions.navigate({
             routeName: 'AddRelations',
-
             params: {},
-
             action: NavigationActions.navigate({ routeName: 'AddRelations' }),
         });
 

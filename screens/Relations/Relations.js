@@ -4,6 +4,7 @@ import { Button, Container, Header, Icon, Content, Item, Left, List, ListItem, P
 import { NavigationActions } from 'react-navigation';
 import _ from 'lodash';
 
+
 import { connect } from 'react-redux';
 
 import {
@@ -19,9 +20,41 @@ const {
 
 
 class RelationsComponent extends Component {
-    static navigationOptions = {
-        title: 'Relations',
-    };
+    static navigationOptions = ({navigation, screenProps}) => {
+        const params = navigation.state.params || {};
+      
+        return {
+          title: params.title,
+          headerRight: params.headerRight,
+        }
+      }
+      
+      _setNavigationParams() {
+        let title = 'Relations';
+      
+        let headerRight = 
+        <Button transparent 
+            onPress={() => this.props.navigation.dispatch(this._toAddRelations)}>
+            <Text style={{fontSize: 16, color: 'white', paddingRight: 20}}>
+                Add
+            </Text>
+        </Button>;
+
+        this.props.navigation.setParams({ 
+          title,
+          headerRight,
+        });
+      }
+      
+      componentWillMount() {
+        this._setNavigationParams();
+      }
+      
+      _toAddRelations = NavigationActions.navigate({
+        routeName: 'AddRelations',
+        params: {},
+        action: NavigationActions.navigate({ routeName: 'AddRelations' }),
+    });
 
     componentDidMount() {
        this.props.load_relations();
@@ -40,8 +73,6 @@ class RelationsComponent extends Component {
             arrange_by: value
         });
     }
-
-
 
     populateRelations = () => {
         return _.map(this.props.all_relations, (item, index)=>{
@@ -64,8 +95,6 @@ class RelationsComponent extends Component {
 
     render() {
         
-
-        console.log(this.props.all_relations);
         return (
  
             <Container>

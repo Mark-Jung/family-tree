@@ -102,6 +102,16 @@ class AddRelationsComponent extends Component {
                             <Input onChangeText={(text) => this.setState({lives_in: text})}
                                     value={this.state.lives_in}/>
                         </Item>
+                        <Item floatingLabel style={{
+                            paddingBottom: 5,
+                            marginTop: 5,
+                            marginLeft: 0,
+                        }}>
+                            <Label style={{color: '#9ab2ce'}}>Nickname</Label>
+                            <Input onChangeText={(text) => this.setState({nickname: text})}
+                                    value={this.state.nickname}/>
+                        </Item>
+                    
                     </Form>
                     </Content>
         )
@@ -110,12 +120,12 @@ class AddRelationsComponent extends Component {
 
     render() {
         
-        const toRelations = NavigationActions.navigate({
-            routeName: 'Relations',
+        const toDetails = NavigationActions.navigate({
+            routeName: 'Details',
           
             params: {},
           
-            action: NavigationActions.navigate({ routeName: 'Relations' }),
+            action: NavigationActions.navigate({ routeName: 'Details' }),
         });
         
         const toAddRelations = NavigationActions.navigate({
@@ -130,6 +140,7 @@ class AddRelationsComponent extends Component {
 
         return (
             <Container>
+            <ScrollView>
             <View style={{
                 
                 flexDirection: 'row',
@@ -384,7 +395,7 @@ class AddRelationsComponent extends Component {
                 flex: 1,
                 justifyContent: 'flex-start',
               }}>
-                <ScrollView>
+                
                     <Container>
                         <View>
                     <Content>
@@ -410,10 +421,11 @@ class AddRelationsComponent extends Component {
                     </Form>
                     </Content>
                 </View>
+                
 
                 
                 </Container>
-                </ScrollView>
+                
                 <View style={{flexDirection: 'row', justifyContent: 'space-between',}}>
                     <View style={{width: 150}}>
                         <Button
@@ -427,13 +439,14 @@ class AddRelationsComponent extends Component {
                         <Button
                             style={{backgroundColor: '#94878F', borderColor: '#94878F', borderRadius: 22, marginRight: 8.5}}
                             textStyle={{color: 'white'}}
-                            onPress={() => this.props.navigation.dispatch(toRelations)}>
+                            onPress={() => this.props.navigation.dispatch(toDetails)}>
                             Done
                         </Button>
                     </View>
                 </View>
                 
             </View>
+            </ScrollView>
             </Container>
         );
     }

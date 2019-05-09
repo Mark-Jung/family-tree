@@ -38,6 +38,7 @@ export default function reducer(state = INITIAL_STATE, action) {
                 error_message: "load failed",
             }
         case LOAD_RELATIONS_SUCCESS: 
+            console.log(action.payload);
             return {
                 ...state, 
                 error_message: "", 
@@ -53,7 +54,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 export function thunk_load_relation () {
     return (dispatch, getState) => {
         dispatch({ type: LOAD_RELATIONS });
-        const url = APIConfig.localapiRoot + '/relation/demo';
+        const url = APIConfig.localapiRoot + '/relation/2';
         return axios.get(url)
         .then((response) => {
             dispatch({

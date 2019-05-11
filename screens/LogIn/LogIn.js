@@ -24,6 +24,15 @@ class LogInComponent extends Component {
       };
 
     
+    /* To make this page the initial page and no longer callable later/no longer part of the stack
+    
+    this.props.navigation.dispatch(
+    NavigationActions.reset({
+     index: 0,
+     actions: [NavigationActions.navigate({ routeName: "Dashboard" })]
+    })
+   );*/
+   
     constructor(props) {
         super(props);
         this.state = {
@@ -58,66 +67,6 @@ class LogInComponent extends Component {
         });
     }
 
-    DeathYearInput = () => {
-        return (
-            
-                <Content style={{marginRight: 12}}>
-                    <Form>
-                        <Item floatingLabel style={{
-                            paddingBottom: 5,
-                            marginTop: 5,
-                            marginLeft: 0,
-                        }}>
-                            <Label style={{color: '#9ab2ce'}}>Death Year</Label>
-                            <Input onChangeText={(text) => this.setState({death_year: text})}
-                                    value={this.state.death_year}
-                                    disabled={!this.state.is_deceased}/>
-                        </Item>
-                    </Form>
-                    </Content>
-        )
-            
-    }
-
-    OptionalFieldsInput = () => {
-        return (
-            
-                <Content style={{marginLeft: 13}}>
-                    <Form>
-                        <Item floatingLabel style={{
-                            paddingBottom: 5,
-                            marginTop: 5,
-                            marginLeft: 0,
-                        }}>
-                            <Label style={{color: '#9ab2ce'}}>Birth date (mm/dd)</Label>
-                            <Input onChangeText={(text) => this.setState({birth_date: text})}
-                                    value={this.state.birth_date}/>
-                        </Item>
-                        <Item floatingLabel style={{
-                            paddingBottom: 5,
-                            marginTop: 5,
-                            marginLeft: 0,
-                        }}>
-                            <Label style={{color: '#9ab2ce'}}>Place of Residence</Label>
-                            <Input onChangeText={(text) => this.setState({lives_in: text})}
-                                    value={this.state.lives_in}/>
-                        </Item>
-                        <Item floatingLabel style={{
-                            paddingBottom: 5,
-                            marginTop: 5,
-                            marginLeft: 0,
-                        }}>
-                            <Label style={{color: '#9ab2ce'}}>Nickname</Label>
-                            <Input onChangeText={(text) => this.setState({nickname: text})}
-                                    value={this.state.nickname}/>
-                        </Item>
-                    
-                    </Form>
-                    </Content>
-        )
-            
-    }
-
     render() {
         
         const toDetails = NavigationActions.navigate({
@@ -135,8 +84,6 @@ class LogInComponent extends Component {
           
             action: NavigationActions.navigate({ routeName: 'AddRelations' }),
         });
-
-
 
         return (
             <Container>
@@ -162,7 +109,6 @@ class LogInComponent extends Component {
                 <Content>
                 <Form>
                     <Item floatingLabel floatingLabel style={{
-                        
                         paddingBottom: 5
                     }}>
                         <Label style={{color: '#9ab2ce'}}>Last Name</Label>

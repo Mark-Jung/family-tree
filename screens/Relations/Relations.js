@@ -25,6 +25,7 @@ class RelationsComponent extends Component {
       
         return {
           title: params.title,
+          headerLeft: null,
           headerRight: params.headerRight,
         }
       }

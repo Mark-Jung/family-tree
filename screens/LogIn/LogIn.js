@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { AppRegistry, Dimensions, View, Text, ScrollView, TouchableNativeFeedback, Platform } from 'react-native';
+import { AppRegistry, Dimensions, View, Text, ScrollView, TouchableHighlight, TouchableNativeFeedback, TouchableOpacity, Platform, Image } from 'react-native';
 import { Body, CheckBox, Container, Content, Form, Icon, Input, Item, Label, ListItem, Picker } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import Button from 'apsl-react-native-button'
-import CustomHeader from '../../components/Common/CustomHeader'
 
 import { connect } from 'react-redux';
 
@@ -20,18 +19,20 @@ const {
 class LogInComponent extends Component {
 
     static navigationOptions = {
-        title: 'Log In',
+        //title: 'Log In',
+        header: null,
+        headerVisible: false,
       };
 
     
     /* To make this page the initial page and no longer callable later/no longer part of the stack
     
-    this.props.navigation.dispatch(
-    NavigationActions.reset({
-     index: 0,
-     actions: [NavigationActions.navigate({ routeName: "Dashboard" })]
-    })
-   );*/
+        this.props.navigation.dispatch(
+            NavigationActions.reset({
+             index: 0,
+             actions: [NavigationActions.navigate({ routeName: "LogIn" })]
+            })
+           );*/
    
     constructor(props) {
         super(props);
@@ -55,17 +56,6 @@ class LogInComponent extends Component {
             nickname: undefined,
         };
     }
-    onGenderChange(value: string) {
-        this.setState({
-            gender: value
-        });
-    }
-
-    onRelatedToChange(value: string) {
-        this.setState({
-            relatedTo: value
-        });
-    }
 
     render() {
         
@@ -85,8 +75,32 @@ class LogInComponent extends Component {
             action: NavigationActions.navigate({ routeName: 'AddRelations' }),
         });
 
+        const toRelations = NavigationActions.navigate({
+            routeName: 'Relations',
+          
+            params: {},
+          
+            action: NavigationActions.navigate({ routeName: 'Relations' }),
+        });
+
+
+        setTimeout(() => {
+            this.props.navigation.navigate('Relations') 
+        }, 3000);
+
         return (
-            <Container>
+            <View style={{flex:1}}>
+                 <Image
+                    style={{
+                        flex: 1,
+                        alignSelf: 'stretch',
+                        width: undefined,
+                        height: undefined,}}
+                    source={require('./FAM_logo.png')}
+                    resizeMode='contain'
+                    />
+            </View>
+            /*<Container>
             <ScrollView>
             <View style={{
                 
@@ -120,7 +134,7 @@ class LogInComponent extends Component {
             </View>
 
             </ScrollView>
-            </Container>
+            </Container>*/
         );
     }
 }

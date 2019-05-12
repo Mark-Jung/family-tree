@@ -4,6 +4,7 @@ import { Body, CheckBox, Container, Content, Form, Icon, Input, Item, Label, Lis
 import { NavigationActions } from 'react-navigation';
 import Button from 'apsl-react-native-button'
 
+
 import { connect } from 'react-redux';
 
 import styles from './styles';
@@ -33,7 +34,6 @@ class LogInComponent extends Component {
              actions: [NavigationActions.navigate({ routeName: "LogIn" })]
             })
            );*/
-   
     constructor(props) {
         super(props);
         this.state = {
@@ -135,6 +135,7 @@ class LogInComponent extends Component {
 
             </ScrollView>
             </Container>*/
+
         );
     }
 }

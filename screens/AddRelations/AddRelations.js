@@ -23,7 +23,6 @@ class AddRelationsComponent extends Component {
         title: 'Add Relation',
       };
 
-    
     constructor(props) {
         super(props);
         this.state = {
@@ -81,7 +80,6 @@ class AddRelationsComponent extends Component {
 
     OptionalFieldsInput = () => {
         return (
-            
                 <Content style={{marginLeft: 13}}>
                     <Form>
                         <Item floatingLabel style={{
@@ -139,10 +137,9 @@ class AddRelationsComponent extends Component {
 
 
         return (
-            <Container>
+            <Container style={{flex: 1,}}>
             <ScrollView>
             <View style={{
-                
                 flexDirection: 'row',
                 justifyContent: 'flex-start',
               }}>
@@ -389,43 +386,12 @@ class AddRelationsComponent extends Component {
             {this.state.show_optional ? this.OptionalFieldsInput() : null}
 
             
-            
             <View style={{
                 flatListStyle,
                 flex: 1,
-                justifyContent: 'flex-start',
+                justifyContent: 'flex-end',
+                marginTop: 30,
               }}>
-                
-                    <Container>
-                        <View>
-                    <Content>
-                    <Form>
-                        <Item floatingLabel style={{
-                            width: 150,
-                            paddingBottom: 5
-                        }}>
-                            <Label>First Name</Label>
-                            <Input />
-                        </Item>
-                    </Form>
-                    </Content>
-                    <Content>
-                    <Form>
-                        <Item floatingLabel floatingLabel style={{
-                            width: 150,
-                            paddingBottom: 5
-                        }}>
-                            <Label>Last Name</Label>
-                            <Input />
-                        </Item>
-                    </Form>
-                    </Content>
-                </View>
-                
-
-                
-                </Container>
-                
                 <View style={{flexDirection: 'row', justifyContent: 'space-between',}}>
                     <View style={{width: 150}}>
                         <Button
@@ -444,7 +410,6 @@ class AddRelationsComponent extends Component {
                         </Button>
                     </View>
                 </View>
-                
             </View>
             </ScrollView>
             </Container>

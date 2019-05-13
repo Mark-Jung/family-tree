@@ -86,7 +86,7 @@ class LogInComponent extends Component {
 
         setTimeout(() => {
             this.props.navigation.navigate('Relations') 
-        }, 3000);
+        }, 1000);
 
         return (
             <View style={{flex:1}}>

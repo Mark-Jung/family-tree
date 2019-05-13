@@ -3,6 +3,7 @@ import { AppRegistry, Dimensions, View, Text, ScrollView, TouchableNativeFeedbac
 import { Body, CheckBox, Container, Content, Form, Icon, Input, Item, Label, ListItem, Picker } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import Button from 'apsl-react-native-button'
+import _ from 'lodash';
 import CustomHeader from '../../components/Common/CustomHeader'
 
 import { connect } from 'react-redux';
@@ -114,6 +115,23 @@ class AddRelationsComponent extends Component {
                     </Content>
         )
             
+    }
+
+    populateRelations = () => {
+        return _.map(this.props.all_relations, (item, index)=>{
+            const toDetails = NavigationActions.navigate({
+                routeName: 'Details',
+              
+                params: {},
+              
+                action: NavigationActions.navigate({ routeName: 'Details' }),
+            });
+            
+            return (
+                
+                <Picker.Item label={item.first + " " + item.last} value={item.userid} />
+            )
+        })
     }
 
     render() {
@@ -371,8 +389,8 @@ class AddRelationsComponent extends Component {
                             onValueChange={this.onRelatedToChange.bind(this)}
                         >
                             <Picker.Item label="me" value="userID" />
-                            <Picker.Item label="Mom's Name" value="mom" />
-                            <Picker.Item label="Dad's Name" value="dad" />
+                            {this.populateRelations()}
+                            
                         </Picker>
                 </Item> 
             </View>
@@ -423,8 +441,11 @@ export { AddRelationsComponent };
 
 
 const mapStateToProps = (state, ownProps) => {
+    const { relations } = state;
+    const { error_message, all_relations } = relations;
     return {
         ...ownProps,
+        all_relations,
     };
 };
 

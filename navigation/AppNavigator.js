@@ -1,4 +1,5 @@
 import React from 'react';
+import { AppRegistry, View, Image } from 'react-native';
 import { 
     createStackNavigator,
     createAppContainer,

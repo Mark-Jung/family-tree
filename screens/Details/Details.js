@@ -60,11 +60,12 @@ class DetailsComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "Amy Yang", // undefined,
-            relation: "Me", // undefined,
-            birth_year: "1998", // undefined,
-            nickname: "Princess", // undefined,
-            lives_in: "New York City",  // undefined
+
+            name: this.props.navigation.getParam('name'), 
+            relation: this.props.navigation.getParam('relation'), 
+            birth_year: this.props.navigation.getParam('birth_year'), 
+            nickname: this.props.navigation.getParam('nickname'), 
+            lives_in: this.props.navigation.getParam('lives_in'), 
 
         };
     }
@@ -119,7 +120,7 @@ class DetailsComponent extends Component {
                 </View>
 
                 <View style={{ flex: 3 }}>
-                    <Text style={{ textAlign: 'left', fontSize: 24, color: 'grey', marginLeft: 15}}>
+                    {/*<Text style={{ textAlign: 'left', fontSize: 24, color: 'grey', marginLeft: 15}}>
                         Relations
                     </Text>
                     <List>
@@ -143,7 +144,7 @@ class DetailsComponent extends Component {
                             <Left><Text style={{ fontSize: 20 }}>Lexi Ryan</Text></Left>
                             <Right><Text style={{ fontWeight: "bold", color: '#DB9872' }}>Mother</Text></Right>
                         </ListItem>
-                    </List>
+                    </List>*/}
                     <Button
                         style={{ backgroundColor: '#94878F', borderColor: '#94878F', borderRadius: 22, }}
                         textStyle={{ color: 'white' }}

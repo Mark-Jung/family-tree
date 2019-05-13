@@ -73,7 +73,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 export function thunk_load_relation () {
     return (dispatch, getState) => {
         dispatch({ type: LOAD_RELATIONS });
-        const url = APIConfig.localapiRoot + '/relation/2';
+        const url = APIConfig.localapiRoot + '/relation/' + APIConfig.user_id;
         return axios.get(url)
         .then((response) => {
             dispatch({

@@ -27,7 +27,7 @@ const MainStack = createStackNavigator
         screen: AddRelations,
     },
 }, {
-    initialRouteName: 'LogIn',
+    initialRouteName: 'Relations',
     defaultNavigationOptions: {
         headerStyle: {
         backgroundColor: '#86ADDB',

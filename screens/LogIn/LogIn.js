@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { AppRegistry, Dimensions, View, Text, ScrollView, TouchableNativeFeedback, Platform } from 'react-native';
+import { AppRegistry, Dimensions, View, Text, ScrollView, TouchableHighlight, TouchableNativeFeedback, TouchableOpacity, Platform, Image } from 'react-native';
 import { Body, CheckBox, Container, Content, Form, Icon, Input, Item, Label, ListItem, Picker } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import Button from 'apsl-react-native-button'
-import CustomHeader from '../../components/Common/CustomHeader'
+
 
 import { connect } from 'react-redux';
 
@@ -20,10 +20,20 @@ const {
 class LogInComponent extends Component {
 
     static navigationOptions = {
-        title: 'Log In',
+        //title: 'Log In',
+        header: null,
+        headerVisible: false,
       };
 
     
+    /* To make this page the initial page and no longer callable later/no longer part of the stack
+    
+        this.props.navigation.dispatch(
+            NavigationActions.reset({
+             index: 0,
+             actions: [NavigationActions.navigate({ routeName: "LogIn" })]
+            })
+           );*/
     constructor(props) {
         super(props);
         this.state = {
@@ -46,77 +56,6 @@ class LogInComponent extends Component {
             nickname: undefined,
         };
     }
-    onGenderChange(value: string) {
-        this.setState({
-            gender: value
-        });
-    }
-
-    onRelatedToChange(value: string) {
-        this.setState({
-            relatedTo: value
-        });
-    }
-
-    DeathYearInput = () => {
-        return (
-            
-                <Content style={{marginRight: 12}}>
-                    <Form>
-                        <Item floatingLabel style={{
-                            paddingBottom: 5,
-                            marginTop: 5,
-                            marginLeft: 0,
-                        }}>
-                            <Label style={{color: '#9ab2ce'}}>Death Year</Label>
-                            <Input onChangeText={(text) => this.setState({death_year: text})}
-                                    value={this.state.death_year}
-                                    disabled={!this.state.is_deceased}/>
-                        </Item>
-                    </Form>
-                    </Content>
-        )
-            
-    }
-
-    OptionalFieldsInput = () => {
-        return (
-            
-                <Content style={{marginLeft: 13}}>
-                    <Form>
-                        <Item floatingLabel style={{
-                            paddingBottom: 5,
-                            marginTop: 5,
-                            marginLeft: 0,
-                        }}>
-                            <Label style={{color: '#9ab2ce'}}>Birth date (mm/dd)</Label>
-                            <Input onChangeText={(text) => this.setState({birth_date: text})}
-                                    value={this.state.birth_date}/>
-                        </Item>
-                        <Item floatingLabel style={{
-                            paddingBottom: 5,
-                            marginTop: 5,
-                            marginLeft: 0,
-                        }}>
-                            <Label style={{color: '#9ab2ce'}}>Place of Residence</Label>
-                            <Input onChangeText={(text) => this.setState({lives_in: text})}
-                                    value={this.state.lives_in}/>
-                        </Item>
-                        <Item floatingLabel style={{
-                            paddingBottom: 5,
-                            marginTop: 5,
-                            marginLeft: 0,
-                        }}>
-                            <Label style={{color: '#9ab2ce'}}>Nickname</Label>
-                            <Input onChangeText={(text) => this.setState({nickname: text})}
-                                    value={this.state.nickname}/>
-                        </Item>
-                    
-                    </Form>
-                    </Content>
-        )
-            
-    }
 
     render() {
         
@@ -136,10 +75,32 @@ class LogInComponent extends Component {
             action: NavigationActions.navigate({ routeName: 'AddRelations' }),
         });
 
+        const toRelations = NavigationActions.navigate({
+            routeName: 'Relations',
+          
+            params: {},
+          
+            action: NavigationActions.navigate({ routeName: 'Relations' }),
+        });
 
+
+        setTimeout(() => {
+            this.props.navigation.navigate('Relations') 
+        }, 1000);
 
         return (
-            <Container>
+            <View style={{flex:1}}>
+                 <Image
+                    style={{
+                        flex: 1,
+                        alignSelf: 'stretch',
+                        width: undefined,
+                        height: undefined,}}
+                    source={require('./FAM_logo.png')}
+                    resizeMode='contain'
+                    />
+            </View>
+            /*<Container>
             <ScrollView>
             <View style={{
                 
@@ -162,7 +123,6 @@ class LogInComponent extends Component {
                 <Content>
                 <Form>
                     <Item floatingLabel floatingLabel style={{
-                        
                         paddingBottom: 5
                     }}>
                         <Label style={{color: '#9ab2ce'}}>Last Name</Label>
@@ -174,7 +134,8 @@ class LogInComponent extends Component {
             </View>
 
             </ScrollView>
-            </Container>
+            </Container>*/
+
         );
     }
 }

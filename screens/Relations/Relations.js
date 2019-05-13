@@ -25,6 +25,7 @@ class RelationsComponent extends Component {
       
         return {
           title: params.title,
+          headerLeft: null,
           headerRight: params.headerRight,
         }
       }
@@ -81,15 +82,30 @@ class RelationsComponent extends Component {
             const toDetails = NavigationActions.navigate({
                 routeName: 'Details',
               
-                params: {},
+                params: {'itemID': item.id, 
+                        'name': item.first + " " + item.last, 
+                        'birth_year': item.birth_year, 
+                        'death_year': item.death_year,
+                        'is_deceased': item.is_deceased,
+                        'gender': item.gender,
+                        'relation': item.relation,
+                        'notes': item.notes,
+                        'is_step': item.is_step,
+                        'is_adopted': item.is_adopted,
+                        'birth_date': item.birth_date,
+                        'lives_in': item.lives_in,
+                        'nickname': item.nickname,
+                    },
+                
               
-                action: NavigationActions.navigate({ routeName: 'Details' }),
+                action: NavigationActions.navigate({ routeName: 'Details', }),
             });
             
             return (
                 <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
                     <Left><Text style={{fontSize: 20}}>{item.first + " " + item.last}</Text></Left> 
                     <Right><Text style={{fontWeight: "bold", color: '#DB9872'}}>{item.relation}</Text></Right>
+
                 </ListItem>
             )
         })

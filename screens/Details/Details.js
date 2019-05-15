@@ -19,27 +19,61 @@ const {
 
 
 class DetailsComponent extends Component {
-    static navigationOptions = {
-        title: 'Details',
-    };
+    //static navigationOptions = {
+        //title: 'Details',
+    //};
+
+    static navigationOptions = ({navigation, screenProps}) => {
+        const params = navigation.state.params || {};
+      
+        return {
+          title:       params.title,
+          headerRight: params.headerRight,
+        }
+      }
+      
+      _setNavigationParams() {
+        let title       = 'Details';
+        let headerRight = <Button
+            style={{ backgroundColor: '#86ADDB', borderColor: '#86ADDB', paddingRight: 15, }}
+            textStyle={{ color: 'white' }}
+            onPress={() => this.props.navigation.dispatch(this._toAddRelations)}>
+            Edit
+        </Button>;
+      
+        this.props.navigation.setParams({ 
+          title,
+          headerRight, 
+        });
+      }
+      
+      componentWillMount() {
+        this._setNavigationParams();
+      }
+      
+      _toAddRelations = NavigationActions.navigate({
+        routeName: 'AddRelations',
+        params: {},
+        action: NavigationActions.navigate({ routeName: 'AddRelations' }),
+    });
 
     constructor(props) {
         super(props);
         this.state = {
+            // this.props.navigation.getParam('itemID')
             name: this.props.navigation.getParam('name'), 
             relation: this.props.navigation.getParam('relation'), 
             birth_year: this.props.navigation.getParam('birth_year'), 
-            nickname: this.props.navigation.getParam('nickname'), 
-            lives_in: this.props.navigation.getParam('lives_in'), 
+            nickname: this.props.all_relations.filter(r => r.id === this.props.navigation.getParam('itemID'))[0].nickname, 
+            //lives_in: , 
 
         };
     }
+
     render() {
         const toAddRelations = NavigationActions.navigate({
             routeName: 'AddRelations',
-
             params: {},
-
             action: NavigationActions.navigate({ routeName: 'AddRelations' }),
         });
 
@@ -126,8 +160,11 @@ class DetailsComponent extends Component {
 export { DetailsComponent };
 
 const mapStateToProps = (state, ownProps) => {
+    const { relations } = state;
+    const { error_message, all_relations } = relations;
     return {
         ...ownProps,
+        all_relations,
     };
 };
 

@@ -4,6 +4,7 @@ import { Button, Container, Header, Icon, Content, Item, Left, List, ListItem, P
 import { NavigationActions } from 'react-navigation';
 import _ from 'lodash';
 
+
 import { connect } from 'react-redux';
 
 import {
@@ -19,9 +20,42 @@ const {
 
 
 class RelationsComponent extends Component {
-    static navigationOptions = {
-        title: 'Relations',
-    };
+    static navigationOptions = ({navigation, screenProps}) => {
+        const params = navigation.state.params || {};
+      
+        return {
+          title: params.title,
+          headerLeft: null,
+          headerRight: params.headerRight,
+        }
+      }
+      
+      _setNavigationParams() {
+        let title = 'Relations';
+      
+        let headerRight = 
+        <Button transparent 
+            onPress={() => this.props.navigation.dispatch(this._toAddRelations)}>
+            <Text style={{fontSize: 16, color: 'white', paddingRight: 20}}>
+                Add
+            </Text>
+        </Button>;
+
+        this.props.navigation.setParams({ 
+          title,
+          headerRight,
+        });
+      }
+      
+      componentWillMount() {
+        this._setNavigationParams();
+      }
+      
+      _toAddRelations = NavigationActions.navigate({
+        routeName: 'AddRelations',
+        params: {},
+        action: NavigationActions.navigate({ routeName: 'AddRelations' }),
+    });
 
     componentDidMount() {
        this.props.load_relations();
@@ -50,22 +84,17 @@ class RelationsComponent extends Component {
               
                 params: {'itemID': item.id, 
                         'name': item.first + " " + item.last, 
-                        'birth_year': item.birth_year, 
-                        'death_year': item.death_year,
-                        'is_deceased': item.is_deceased,
-                        'gender': item.gender,
+                        'birth_year': item.birth_date, 
                         'relation': item.relation,
-                        'notes': item.notes,
-                        'is_step': item.is_step,
-                        'is_adopted': item.is_adopted,
-                        'birth_date': item.birth_date,
-                        'lives_in': item.lives_in,
-                        'nickname': item.nickname,
                     },
                 
               
                 action: NavigationActions.navigate({ routeName: 'Details', }),
             });
+
+            if(item.relation == "self"){
+                return null;
+            }
             
             return (
                 <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>

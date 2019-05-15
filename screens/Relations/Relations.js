@@ -84,22 +84,17 @@ class RelationsComponent extends Component {
               
                 params: {'itemID': item.id, 
                         'name': item.first + " " + item.last, 
-                        'birth_year': item.birth_year, 
-                        'death_year': item.death_year,
-                        'is_deceased': item.is_deceased,
-                        'gender': item.gender,
+                        'birth_year': item.birth_date, 
                         'relation': item.relation,
-                        'notes': item.notes,
-                        'is_step': item.is_step,
-                        'is_adopted': item.is_adopted,
-                        'birth_date': item.birth_date,
-                        'lives_in': item.lives_in,
-                        'nickname': item.nickname,
                     },
                 
               
                 action: NavigationActions.navigate({ routeName: 'Details', }),
             });
+
+            if(item.relation == "self"){
+                return null;
+            }
             
             return (
                 <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>

@@ -95,7 +95,6 @@ class RelationsComponent extends Component {
             if(item.relation == "self"){
                 return null;
             }
-
             return (
                 <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
 

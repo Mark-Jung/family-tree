@@ -4,14 +4,16 @@ import { NavigationActions } from 'react-navigation';
 import { List, ListItem, Item, Left, Right } from 'native-base';
 import Button from 'apsl-react-native-button'
 import CustomHeader from '../../components/Common/CustomHeader'
+import _ from 'lodash';
 
 import { connect } from 'react-redux';
 
 import {
     thunk_load_details,
-} from '../../ducks/details';
+} from '../../ducks/relations';
 
 import styles from './styles';
+
 
 const {
     flatListStyle
@@ -19,9 +21,8 @@ const {
 
 
 class DetailsComponent extends Component {
-    //static navigationOptions = {
-        //title: 'Details',
-    //};
+
+
 
     static navigationOptions = ({navigation, screenProps}) => {
         const params = navigation.state.params || {};
@@ -50,6 +51,11 @@ class DetailsComponent extends Component {
       componentWillMount() {
         this._setNavigationParams();
       }
+      componentDidMount() {
+        let this_id = this.props.navigation.getParam('itemID');
+        this.props.load_details(this_id);
+        //this.populateDetails();
+      }
       
       _toAddRelations = NavigationActions.navigate({
         routeName: 'AddRelations',
@@ -57,20 +63,55 @@ class DetailsComponent extends Component {
         action: NavigationActions.navigate({ routeName: 'AddRelations' }),
     });
 
+    populateDetails = () => {
+        return _.map(this.props.all_relations, (item, index)=>{
+            if (item.id == this.props.navigation.getParam('itemID')){
+                this.setState({
+                    death_year: item.death_year,
+                    is_deceased: item.is_deceased,
+                    gender: item.gender,
+                    is_step: item.is_step,
+                    is_adopted: item.is_adopted,
+                    lives_in: item.lives_in,
+                    nickname: item.nickname,
+                    populate_called: "true",
+                })
+
+            }
+        });
+
+            return (
+                <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
+                    <Left><Text style={{fontSize: 20}}>{item.first + " " + item.last}</Text></Left> 
+                    <Right><Text style={{fontWeight: "bold", color: '#DB9872'}}>{item.relation}</Text></Right>
+
+                </ListItem>
+            )
+        
+    }
+
     constructor(props) {
         super(props);
         this.state = {
-
+            state_id: this.props.navigation.getParam('itemID'),
             name: this.props.navigation.getParam('name'), 
             relation: this.props.navigation.getParam('relation'), 
             birth_year: this.props.navigation.getParam('birth_year'), 
-            nickname: this.props.navigation.getParam('nickname'), 
-            lives_in: this.props.navigation.getParam('lives_in'), 
-
+            death_year: "",
+            is_deceased: false,
+            gender: "",
+            is_step: false, 
+            is_adopted: false,
+            lives_in: "",
+            nickname: "",
+            populate_called: "false",
         };
+        
     }
+    
 
     render() {
+        
         const toAddRelations = NavigationActions.navigate({
             routeName: 'AddRelations',
             params: {},
@@ -111,10 +152,13 @@ class DetailsComponent extends Component {
                             {this.state.birth_year}
                         </Text>
                         <Text style={{ textAlign: 'left', fontSize: 24 }}>
-                            {this.state.nickname}
+                            {this.props.nickname}
                         </Text>
                         <Text style={{ textAlign: 'left', fontSize: 24 }}>
                             {this.state.lives_in}
+                        </Text>
+                        <Text style={{ textAlign: 'left', fontSize: 24 }}>
+                            
                         </Text>
                     </View>
                 </View>
@@ -160,13 +204,20 @@ class DetailsComponent extends Component {
 export { DetailsComponent };
 
 const mapStateToProps = (state, ownProps) => {
+    const { relations } = state;
+    const { error_message, all_relations } = relations;
     return {
         ...ownProps,
+        all_relations,
     };
 };
 
 const mapDispatchToProps = dispatch => {
+    
     return {
+        load_details: (this_id) => {
+            dispatch(thunk_load_details(this_id))
+        }
     }
 }
 

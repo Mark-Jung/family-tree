@@ -47,7 +47,7 @@ export default function reducer(state = INITIAL_STATE, action) {
                 error_message: "load failed",
             }
         case LOAD_RELATIONS_SUCCESS: 
-            console.log(action.payload);
+            //console.log(action.payload);
             return {
                 ...state, 
                 error_message: "", 
@@ -65,7 +65,7 @@ export default function reducer(state = INITIAL_STATE, action) {
             return {
                 ...state, 
                 error_message: "", 
-                all_relations: action.payload, 
+                all_details: action.payload, 
             }
         case ADD_RELATIONS: 
             return state;

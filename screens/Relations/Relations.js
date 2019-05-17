@@ -95,14 +95,27 @@ class RelationsComponent extends Component {
             if(item.relation == "self"){
                 return null;
             }
-            
             return (
                 <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
-                    <Left><Text style={{fontSize: 20}}>{item.first + " " + item.last}</Text></Left> 
-                    <Right><Text style={{fontWeight: "bold", color: '#DB9872'}}>{item.relation}</Text></Right>
 
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',}}>
+                    <Text style={{fontSize: 20}}>{item.first + " " + item.last}</Text>
+                    <Text style={{fontWeight: "bold", color: '#DB9872'}}>{item.relation}</Text>
+
+                </View>
                 </ListItem>
             )
+            
+            // return (
+            //     <ListItem onPress={() => this.props.navigation.dispatch(toDetails)}>
+            //         <Left><Text style={{fontSize: 20}}>{item.first + " " + item.last}</Text></Left> 
+            //         <Right><Text style={{fontWeight: "bold", color: '#DB9872'}}>{item.relation}</Text></Right>
+
+            //     </ListItem>
+            // )
         })
     }
 
